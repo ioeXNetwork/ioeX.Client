@@ -1,14 +1,12 @@
 # ioeX.Client
 
 ## Summary
-ioeX leveraged Elastos functions to create its owned features and also business cases.
-
 This is the client program of the IOEX node, which is a command line tool to control node and see node info etc.
 Also, this project including a light implementation of IOEX wallet, which can create your IOEX account, do receive, create, sign or send transactions.
 You can run a node locally and set the miner address to your wallet account, then run the node to get your own IOEXs and do whatever you like.
 
 ## Wiki
-For more details, please check on this [Wiki](https://github.com/ioeX/ioeX.Client/wiki) page.
+For more details, please check on this [Wiki](https://github.com/ioeXNetwork/ioeX.Client/wiki) page.
 
 ## Build on Mac
 
@@ -66,22 +64,22 @@ glide version 0.13.1
 ```
 If you cannot see the version number, there must be something wrong when install.
 
-### Clone source code to $GOPATH/src/github.com/ioeX/ folder
-Make sure you are in the folder of `$GOPATH/src/github.com/ioeX/`
+### Clone source code to $GOPATH/src/github.com/ioeXNetwork/ folder
+Make sure you are in the folder of `$GOPATH/src/github.com/ioeXNetwork/`
 ```shell
-$ go clone https://github.com/ioeX/ioeX.Client.git
+$ git clone https://github.com/ioeXNetwork/ioeX.Client.git
 ```
 
-If clone works successfully, you should see folder structure like $GOPATH/src/github.com/ioeX/ioeX.Client/Makefile
+If clone works successfully, you should see folder structure like $GOPATH/src/github.com/ioeXNetwork/ioeX.Client/Makefile
 
 ### Glide install
 
 Run `glide update && glide install` to download project dependencies.
 
 ### Install sqlite database
-This will make the `make` progress far more fester.
+This will make the `make` progress far more faster.
 ```shell
-go install github.com/ioeX/ioeX.Client/vendor/github.com/mattn/go-sqlite3
+go install github.com/ioeXNetwork/ioeX.Client/vendor/github.com/mattn/go-sqlite3
 ```
 
 ### Make
@@ -150,13 +148,13 @@ glide version v0.13.1
 ```
 If you cannot see the version number, there must be something wrong when install.
 
-### Clone source code to $GOPATH/src/github.com/ioeX/ folder
-Make sure you are in the folder of `$GOPATH/src/github.com/ioeX/`
+### Clone source code to $GOPATH/src/github.com/ioeXNetwork/ folder
+Make sure you are in the folder of `$GOPATH/src/github.com/ioeXNetwork/`
 ```shell
-$ git clone https://github.com/ioeX/ioeX.Client.git
+$ git clone https://github.com/ioeXNetwork/ioeX.Client.git
 ```
 
-If clone works successfully, you should see folder structure like $GOPATH/src/github.com/ioeX/ioeX.Client/Makefile
+If clone works successfully, you should see folder structure like $GOPATH/src/github.com/ioeXNetwork/ioeX.Client/Makefile
 
 ### Glide install
 
@@ -165,7 +163,7 @@ Run `glide update && glide install` to install depandencies.
 ### Install sqlite database
 This will make the `make` progress far more fester.
 ```shell
-go install github.com/ioeX/ioeX.Client/vendor/github.com/mattn/go-sqlite3
+go install github.com/ioeXNetwork/ioeX.Client/vendor/github.com/mattn/go-sqlite3
 ```
 
 ### Make
@@ -247,10 +245,10 @@ OPTIONS:
 ```
 
 ### Wallet
-For test purpose, this command line client implemented a simplified wallet program. You can use it to create your ioex account, check account balance and build, sign or send transactions.
+For test purpose, this command line client implemented a simplified wallet program. You can use it to create your IOEX account, check account balance and build, sign or send transactions.
 #### Tips
 > for some reason, when using multiple command options, the option with no arguments must be put at the last, for example
-`$ ./ioex-cli wallet --name my_wallet.dat --password ioeX --create`, in this case, `--create` must be put at the last, or the command will no work correctly.
+`$ ./ioex-cli wallet --name my_wallet.dat --password ioeXNetwork --create`, in this case, `--create` must be put at the last, or the command will no work correctly.
 ```shell
 $ ./ioex-cli wallet
 NAME:
@@ -300,7 +298,7 @@ Create the wallet
 
 Create a wallet with password arguments
 
-`$ ./ioex-cli wallet --password ioeX --create`
+`$ ./ioex-cli wallet --password ioeXNetwork --create`
 
 Show account information
 
@@ -347,4 +345,4 @@ Send a transaction
 `$ ./ioex-cli wallet -t send --file ready_to_send.txn`
 
 ## License
-ioeX client source code files are made available under the MIT License, located in the LICENSE file.
+ioeXNetwork client source code files are made available under the MIT License, located in the LICENSE file.

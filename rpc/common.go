@@ -1,7 +1,7 @@
 package rpc
 
 import (
-	. "github.com/ioeX/ioeX.MainChain/core"
+	. "github.com/ioeXNetwork/ioeX.MainChain/core"
 )
 
 const TlsPort = 443

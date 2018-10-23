@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/ioeX/ioeX.Client/rpc"
+	"github.com/ioeXNetwork/ioeX.Client/rpc"
 
-	"github.com/urfave/cli"
-	"encoding/json"
 	"bytes"
+	"encoding/json"
+	"github.com/urfave/cli"
 )
 
 func infoAction(c *cli.Context) error {
@@ -130,7 +130,7 @@ func NewCommand() *cli.Command {
 	return &cli.Command{
 		Name:        "info",
 		Usage:       "show node information",
-		Description: "With ioex-cli info, you could look up node status, query blocks, transactions, etc.",
+		Description: "With ela-cli info, you could look up node status, query blocks, transactions, etc.",
 		ArgsUsage:   "[args]",
 		Flags: []cli.Flag{
 			cli.BoolFlag{

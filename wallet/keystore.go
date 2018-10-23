@@ -7,10 +7,10 @@ import (
 	"errors"
 	"sync"
 
-	. "github.com/ioeX/ioeX.Utility/common"
-	"github.com/ioeX/ioeX.Utility/crypto"
-	. "github.com/ioeX/ioeX.MainChain/core"
 	"crypto/elliptic"
+	. "github.com/ioeXNetwork/ioeX.MainChain/core"
+	. "github.com/ioeXNetwork/ioeX.Utility/common"
+	"github.com/ioeXNetwork/ioeX.Utility/crypto"
 )
 
 const (

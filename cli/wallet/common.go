@@ -1,17 +1,17 @@
 package wallet
 
 import (
-	"os"
-	"fmt"
 	"bufio"
 	"errors"
-	"strings"
+	"fmt"
+	"os"
 	"strconv"
+	"strings"
 
-	walt "github.com/ioeX/ioeX.Client/wallet"
+	walt "github.com/ioeXNetwork/ioeX.Client/wallet"
 
-	. "github.com/ioeX/ioeX.Utility/common"
-	"github.com/AlexpanXX/gopass"
+	"github.com/howeyc/gopass"
+	. "github.com/ioeXNetwork/ioeX.Utility/common"
 )
 
 func GetPassword(password []byte, confirmed bool) ([]byte, error) {

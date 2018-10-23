@@ -4,12 +4,12 @@ import (
 	"encoding/json"
 	"os"
 
-	"github.com/ioeX/ioeX.Client/log"
-	. "github.com/ioeX/ioeX.Client/rpc"
+	"github.com/ioeXNetwork/ioeX.Client/log"
+	. "github.com/ioeXNetwork/ioeX.Client/rpc"
 
 	"github.com/cheggaaa/pb"
-	. "github.com/ioeX/ioeX.Utility/common"
-	. "github.com/ioeX/ioeX.MainChain/core"
+	. "github.com/ioeXNetwork/ioeX.MainChain/core"
+	. "github.com/ioeXNetwork/ioeX.Utility/common"
 )
 
 type DataSync interface {
@@ -37,6 +37,7 @@ func (sync *DataSyncImpl) SyncChainData() {
 
 	for {
 		chainHeight, currentHeight, needSync = sync.needSyncBlocks()
+		//log.Error("chainHeight:", chainHeight, "currentHeight:", currentHeight, "needSync", needSync)
 		if !needSync {
 			break
 		}
@@ -70,8 +71,7 @@ func (sync *DataSyncImpl) needSyncBlocks() (uint32, uint32, bool) {
 	}
 
 	currentHeight := sync.CurrentHeight(QueryHeightCode)
-
-	if currentHeight >= chainHeight {
+	if currentHeight > chainHeight { //hungjiun, 20181011
 		return chainHeight, currentHeight, false
 	}
 

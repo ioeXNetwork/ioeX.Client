@@ -4,11 +4,11 @@ import (
 	"os"
 	"sort"
 
-	"github.com/ioeX/ioeX.Client/cli/info"
-	"github.com/ioeX/ioeX.Client/cli/wallet"
-	"github.com/ioeX/ioeX.Client/cli/mine"
-	"github.com/ioeX/ioeX.Client/log"
-	cliLog "github.com/ioeX/ioeX.Client/cli/log"
+	"github.com/ioeXNetwork/ioeX.Client/cli/info"
+	cliLog "github.com/ioeXNetwork/ioeX.Client/cli/log"
+	"github.com/ioeXNetwork/ioeX.Client/cli/mine"
+	"github.com/ioeXNetwork/ioeX.Client/cli/wallet"
+	"github.com/ioeXNetwork/ioeX.Client/log"
 	"github.com/urfave/cli"
 )
 
@@ -20,11 +20,11 @@ func init() {
 
 func main() {
 	app := cli.NewApp()
-	app.Name = "ioex-cli"
+	app.Name = "ela-cli"
 	app.Version = Version
-	app.HelpName = "ioex-cli"
-	app.Usage = "command line tool for IOEX blockchain"
-	app.UsageText = "ioex-cli [global options] command [command options] [args]"
+	app.HelpName = "ela-cli"
+	app.Usage = "command line tool for ELA blockchain"
+	app.UsageText = "ela-cli [global options] command [command options] [args]"
 	app.HideHelp = false
 	app.HideVersion = false
 	//commands

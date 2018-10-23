@@ -1,16 +1,16 @@
 package wallet
 
 import (
-	"os"
-	"fmt"
 	"errors"
-	"strings"
+	"fmt"
 	"io/ioutil"
+	"os"
+	"strings"
 
-	. "github.com/ioeX/ioeX.Client/wallet"
+	. "github.com/ioeXNetwork/ioeX.Client/wallet"
 
-	. "github.com/ioeX/ioeX.Utility/common"
-	"github.com/ioeX/ioeX.Utility/crypto"
+	. "github.com/ioeXNetwork/ioeX.Utility/common"
+	"github.com/ioeXNetwork/ioeX.Utility/crypto"
 	"github.com/urfave/cli"
 )
 

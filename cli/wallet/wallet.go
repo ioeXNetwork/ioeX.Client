@@ -7,10 +7,10 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ioeX/ioeX.Client/log"
-	"github.com/ioeX/ioeX.Client/wallet"
+	"github.com/ioeXNetwork/ioeX.Client/log"
+	"github.com/ioeXNetwork/ioeX.Client/wallet"
 
-	"github.com/ioeX/ioeX.Utility/common"
+	"github.com/ioeXNetwork/ioeX.Utility/common"
 	"github.com/urfave/cli"
 	"golang.org/x/crypto/ripemd160"
 )
@@ -279,7 +279,7 @@ func NewCommand() *cli.Command {
 	return &cli.Command{
 		Name:        "wallet",
 		Usage:       "wallet operations",
-		Description: "With ioex-cli wallet, you can create an account, check account balance or build, sign and send transactions.",
+		Description: "With ela-cli wallet, you can create an account, check account balance or build, sign and send transactions.",
 		ArgsUsage:   "[args]",
 		Flags: []cli.Flag{
 			cli.StringFlag{

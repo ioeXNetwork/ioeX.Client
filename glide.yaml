@@ -1,4 +1,4 @@
-package: github.com/ioeX/ioeX.Client
+package: github.com/ioeXNetwork/ioeX.Client
 import:
 - package: golang.org/x/crypto
   repo: https://github.com/golang/crypto.git
@@ -6,12 +6,13 @@ import:
 - package: golang.org/x/sys
   repo: https://github.com/golang/sys.git
   vcs: git
-- package: github.com/ioeX/ioeX.Utility
+- package: github.com/ioeXNetwork/ioeX.Utility
+  vcs: git
   subpackages:
   - common
   - crypto
-- package: github.com/ioeX/ioeX.MainChain
-  version: release_v0.1.1
+- package: github.com/ioeXNetwork/ioeX.MainChain
+  vcs: git
   subpackages:
   - core
 - package: github.com/howeyc/gopass

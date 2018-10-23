@@ -7,10 +7,10 @@ import (
 	"os"
 	"sync"
 
-	"github.com/ioeX/ioeX.Client/log"
+	"github.com/ioeXNetwork/ioeX.Client/log"
 
-	. "github.com/ioeX/ioeX.Utility/common"
-	. "github.com/ioeX/ioeX.MainChain/core"
+	. "github.com/ioeXNetwork/ioeX.MainChain/core"
+	. "github.com/ioeXNetwork/ioeX.Utility/common"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -314,6 +314,8 @@ func (store *DataStoreImpl) GetAddressUTXOs(programHash *Uint168) ([]*UTXO, erro
 		if err != nil {
 			return nil, err
 		}
+
+		//log.Error("opBytes:", opBytes, "amountBytes:", amountBytes, "lockTime:", lockTime) //hungjiun
 
 		var op OutPoint
 		reader := bytes.NewReader(opBytes)

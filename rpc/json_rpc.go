@@ -8,9 +8,9 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/ioeX/ioeX.Client/config"
+	"github.com/ioeXNetwork/ioeX.Client/config"
 
-	"github.com/ioeX/ioeX.Utility/common"
+	"github.com/ioeXNetwork/ioeX.Utility/common"
 )
 
 type Response struct {
@@ -33,7 +33,7 @@ func GetChainHeight() (uint32, error) {
 	if err != nil {
 		return 0, err
 	}
-	return uint32(result.(float64))-1, nil
+	return uint32(result.(float64)) - 1, nil
 }
 
 func GetBlockHash(height uint32) (*common.Uint256, error) {

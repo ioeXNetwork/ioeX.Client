@@ -1,12 +1,14 @@
 package mine
 
 import (
-	"fmt"
 	"errors"
+	"fmt"
 	"strconv"
 	"strings"
+	"time"
 
-	"github.com/ioeX/ioeX.Client/rpc"
+	"github.com/ioeXNetwork/ioeX.Client/log"
+	"github.com/ioeXNetwork/ioeX.Client/rpc"
 
 	"github.com/urfave/cli"
 )
@@ -48,12 +50,14 @@ func miningAction(c *cli.Context) error {
 		if err != nil || number < 1 {
 			return errors.New("[number] must be a positive integer")
 		}
+		log.Error("time start", time.Now()) //hungjiun
 		result, err := rpc.CallAndUnmarshal("discretemining", rpc.Param("count", number))
 		if err != nil {
 			return err
 		}
-
+		log.Error("time end  ", time.Now()) //hungjiun
 		fmt.Println(result)
+
 		return nil
 	}
 
@@ -64,7 +68,7 @@ func NewCommand() *cli.Command {
 	return &cli.Command{
 		Name:        "mine",
 		Usage:       "toggle cpu mining or manual mine",
-		Description: "With ioex-cli mine, you can toggle cpu mining, or manual mine blocks.",
+		Description: "With ela-cli mine, you can toggle cpu mining, or manual mine blocks.",
 		ArgsUsage:   "[args]",
 		Flags: []cli.Flag{
 			cli.StringFlag{
