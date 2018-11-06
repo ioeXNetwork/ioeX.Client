@@ -5,7 +5,9 @@ import (
 	"crypto/rand"
 	"crypto/sha256"
 	"errors"
+	"fmt"
 	"sync"
+	"time"
 
 	"crypto/elliptic"
 	. "github.com/ioeXNetwork/ioeX.MainChain/core"
@@ -25,6 +27,7 @@ type Keystore interface {
 	GetRedeemScript() []byte
 	GetProgramHash() *Uint168
 	Address() string
+	FileName() string //+Hungjiun, 20181106
 
 	Sign(txn *Transaction) ([]byte, error)
 }
@@ -42,14 +45,26 @@ type KeystoreImpl struct {
 }
 
 func ImportKeystore(name string, password []byte, privateKey []byte) error {
+
+	// Get public key
+	publicKey := new(crypto.PublicKey)
+	publicKey.X, publicKey.Y = elliptic.P256().ScalarBaseMult(privateKey)
+
+	keystore := &KeystoreImpl{}
+
+	// Init keystore parameters
+	keystore.init(privateKey, publicKey)
+
+	//+Hungjiun, 20181106, modify keystore file name to account address
+	formate := "2006-01-02T15-04-05.000000000Z"
+	name = fmt.Sprintf("UTC--%s--%s", time.Now().Format(formate), keystore.Address())
+
 	keystoreFile, err := CreateKeystoreFile(name)
 	if err != nil {
 		return err
 	}
 
-	keystore := &KeystoreImpl{
-		KeystoreFile: keystoreFile,
-	}
+	keystore.KeystoreFile = keystoreFile
 
 	iv := GenerateKey(16)
 	// Set IV
@@ -71,17 +86,10 @@ func ImportKeystore(name string, password []byte, privateKey []byte) error {
 	// Set master key encrypted
 	keystoreFile.SetMasterKeyEncrypted(masterKeyEncrypted)
 
-	// Get public key
-	publicKey := new(crypto.PublicKey)
-	publicKey.X, publicKey.Y = elliptic.P256().ScalarBaseMult(privateKey)
-
 	privateKeyEncrypted, err := keystore.encryptPrivateKey(masterKey, passwordKey, privateKey, publicKey)
 	defer ClearBytes(privateKeyEncrypted)
 	// Set private key encrypted
 	keystoreFile.SetPrivateKeyEncrypted(privateKeyEncrypted)
-
-	// Init keystore parameters
-	keystore.init(privateKey, publicKey)
 
 	err = keystoreFile.SaveToFile()
 	if err != nil {
@@ -95,14 +103,27 @@ func ImportKeystore(name string, password []byte, privateKey []byte) error {
 
 func CreateKeystore(name string, password []byte) (Keystore, error) {
 
+	// Set master key encrypted
+	privateKey, publicKey, err := crypto.GenerateKeyPair()
+	if err != nil {
+		return nil, err
+	}
+
+	keystore := &KeystoreImpl{}
+
+	// Init keystore parameters
+	keystore.init(privateKey, publicKey)
+
+	//+Hungjiun, 20181106, modify keystore file name to account address
+	formate := "2006-01-02T15-04-05.000000000Z"
+	name = fmt.Sprintf("UTC--%s--%s", time.Now().Format(formate), keystore.Address())
+
 	keystoreFile, err := CreateKeystoreFile(name)
 	if err != nil {
 		return nil, err
 	}
 
-	keystore := &KeystoreImpl{
-		KeystoreFile: keystoreFile,
-	}
+	keystore.KeystoreFile = keystoreFile
 
 	iv := GenerateKey(16)
 	// Set IV
@@ -124,19 +145,10 @@ func CreateKeystore(name string, password []byte) (Keystore, error) {
 	// Set master key encrypted
 	keystoreFile.SetMasterKeyEncrypted(masterKeyEncrypted)
 
-	// Generate new key pair
-	privateKey, publicKey, err := crypto.GenerateKeyPair()
-	if err != nil {
-		return nil, err
-	}
-
 	privateKeyEncrypted, err := keystore.encryptPrivateKey(masterKey, passwordKey, privateKey, publicKey)
 	defer ClearBytes(privateKeyEncrypted)
 	// Set private key encrypted
 	keystoreFile.SetPrivateKeyEncrypted(privateKeyEncrypted)
-
-	// Init keystore parameters
-	keystore.init(privateKey, publicKey)
 
 	err = keystoreFile.SaveToFile()
 	if err != nil {
@@ -314,6 +326,11 @@ func (store *KeystoreImpl) GetProgramHash() *Uint168 {
 
 func (store *KeystoreImpl) Address() string {
 	return store.address
+}
+
+//+Hungjiun, 20181106
+func (store *KeystoreImpl) FileName() string {
+	return store.KeystoreFile.fileName
 }
 
 func (store *KeystoreImpl) Sign(txn *Transaction) ([]byte, error) {

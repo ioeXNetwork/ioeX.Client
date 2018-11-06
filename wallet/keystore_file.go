@@ -13,6 +13,7 @@ import (
 const (
 	OldWalletFile       = "wallet.dat"
 	DefaultKeystoreFile = "keystore.dat"
+	DefaultPath         = "keystore/"
 )
 
 type KeystoreFile struct {
@@ -29,12 +30,20 @@ type KeystoreFile struct {
 
 func CreateKeystoreFile(name string) (*KeystoreFile, error) {
 
-	if FileExisted(name) {
+	filePath := DefaultPath + name
+
+	// open keystore dir
+	err := os.MkdirAll(DefaultPath, 0755)
+	if err != nil {
+		return nil, err
+	}
+
+	if FileExisted(filePath) {
 		return nil, errors.New("key store file already exist")
 	}
 
 	file := &KeystoreFile{
-		fileName: name,
+		fileName: filePath,
 		Version:  KeystoreVersion,
 	}
 
@@ -43,8 +52,10 @@ func CreateKeystoreFile(name string) (*KeystoreFile, error) {
 
 func OpenKeystoreFile(name string) (*KeystoreFile, error) {
 
+	filePath := DefaultPath + name
+
 	file := &KeystoreFile{
-		fileName: name,
+		fileName: filePath,
 	}
 
 	err := file.LoadFromFile()

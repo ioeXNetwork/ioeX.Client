@@ -63,10 +63,13 @@ func createWallet(name string, password []byte) error {
 		return err
 	}
 
-	_, err = wallet.Create(name, password)
+	//Hungjiun
+	walletDB, err := wallet.Create(name, password)
 	if err != nil {
 		return err
 	}
+
+	name = walletDB.Keystore.FileName()
 
 	return ShowAccountInfo(name, password)
 }

@@ -1,6 +1,8 @@
 # ioeX.Client
 
 ## Summary
+ioeX leveraged Elastos functions to create its owned features and also business cases.
+
 This is the client program of the IOEX node, which is a command line tool to control node and see node info etc.
 Also, this project including a light implementation of IOEX wallet, which can create your IOEX account, do receive, create, sign or send transactions.
 You can run a node locally and set the miner address to your wallet account, then run the node to get your own IOEXs and do whatever you like.
