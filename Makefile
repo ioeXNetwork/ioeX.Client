@@ -1,10 +1,10 @@
 BUILD=go build
 VERSION := $(shell git describe --abbrev=4 --dirty --always --tags)
 Minversion := $(shell date)
-BUILD_ELA_CLI = -ldflags "-X main.Version=$(VERSION)"
+BUILD_IOEX_CLI = -ldflags "-X main.Version=$(VERSION)"
 
 all:
-	$(BUILD) $(BUILD_ELA_CLI) ioex-cli.go
+	$(BUILD) $(BUILD_IOEX_CLI) ioex-cli.go
 
 linux:
-	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(BUILD) $(BUILD_ELA_CLI) ioex-cli.go
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(BUILD) $(BUILD_IOEX_CLI) ioex-cli.go

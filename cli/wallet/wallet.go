@@ -281,7 +281,7 @@ func NewCommand() *cli.Command {
 	return &cli.Command{
 		Name:        "wallet",
 		Usage:       "wallet operations",
-		Description: "With ela-cli wallet, you can create an account, check account balance or build, sign and send transactions.",
+		Description: "With ioex-cli wallet, you can create an account, check account balance or build, sign and send transactions.",
 		ArgsUsage:   "[args]",
 		Flags: []cli.Flag{
 			cli.StringFlag{

@@ -130,7 +130,7 @@ func NewCommand() *cli.Command {
 	return &cli.Command{
 		Name:        "info",
 		Usage:       "show node information",
-		Description: "With ela-cli info, you could look up node status, query blocks, transactions, etc.",
+		Description: "With ioex-cli info, you could look up node status, query blocks, transactions, etc.",
 		ArgsUsage:   "[args]",
 		Flags: []cli.Flag{
 			cli.BoolFlag{

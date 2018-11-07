@@ -432,7 +432,7 @@ func getSystemAssetId() Uint256 {
 		PayloadVersion: 0,
 		Payload: &PayloadRegisterAsset{
 			Asset: Asset{
-				Name:      "ELA",
+				Name:      "IOEX",
 				Precision: 0x08,
 				AssetType: 0x00,
 			},

@@ -20,11 +20,11 @@ func init() {
 
 func main() {
 	app := cli.NewApp()
-	app.Name = "ela-cli"
+	app.Name = "ioex-cli"
 	app.Version = Version
-	app.HelpName = "ela-cli"
-	app.Usage = "command line tool for ELA blockchain"
-	app.UsageText = "ela-cli [global options] command [command options] [args]"
+	app.HelpName = "ioex-cli"
+	app.Usage = "command line tool for IOEX blockchain"
+	app.UsageText = "ioex-cli [global options] command [command options] [args]"
 	app.HideHelp = false
 	app.HideVersion = false
 	//commands
