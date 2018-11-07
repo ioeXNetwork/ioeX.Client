@@ -63,7 +63,6 @@ func createWallet(name string, password []byte) error {
 		return err
 	}
 
-	//Hungjiun
 	walletDB, err := wallet.Create(name, password)
 	if err != nil {
 		return err
