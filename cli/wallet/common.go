@@ -99,6 +99,38 @@ func SelectAccount(wallet walt.Wallet) (string, error) {
 	return addrs[index].Address, nil
 }
 
+func ShowAccountByAddress(addr *walt.Address, newAddr *Uint168, wallet walt.Wallet) error {
+	// print header
+	fmt.Printf("%-34s %-20s%22s %6s\n", "ADDRESS", "BALANCE", "(LOCKED)", "TYPE")
+	fmt.Println(strings.Repeat("-", 34), strings.Repeat("-", 42), "------")
+
+	currentHeight := wallet.CurrentHeight(walt.QueryHeightCode)
+	//for i, addr := range addrs {
+	available := Fixed64(0)
+	locked := Fixed64(0)
+	UTXOs, err := wallet.GetAddressUTXOs(addr.ProgramHash)
+	if err != nil {
+		return errors.New("get " + addr.Address + " UTXOs failed")
+	}
+	for _, utxo := range UTXOs {
+		if utxo.LockTime < currentHeight {
+			available += *utxo.Amount
+		} else {
+			locked += *utxo.Amount
+		}
+	}
+	var format = "%-34s %-20s%22s %6s\n"
+	if newAddr != nil && newAddr.IsEqual(*addr.ProgramHash) {
+		format = "\033[0;32m" + format + "\033[m"
+	}
+
+	fmt.Printf(format, addr.Address, available.String(), "("+locked.String()+")", addr.TypeName())
+	fmt.Println("-----", strings.Repeat("-", 34), strings.Repeat("-", 42), "------")
+	//}
+
+	return nil
+}
+
 func ShowAccounts(addrs []*walt.Address, newAddr *Uint168, wallet walt.Wallet) error {
 	// print header
 	fmt.Printf("%5s %34s %-20s%22s %6s\n", "INDEX", "ADDRESS", "BALANCE", "(LOCKED)", "TYPE")
