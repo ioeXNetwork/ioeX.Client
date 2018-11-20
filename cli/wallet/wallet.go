@@ -112,6 +112,23 @@ func listBalanceInfo(wallet wallet.Wallet) error {
 	return ShowAccounts(addresses, nil, wallet)
 }
 
+func listBalanceInfoForAddress(address string, wallet wallet.Wallet) error {
+	wallet.SyncChainData()
+
+	programHash, err := common.Uint168FromAddress(address)
+	if err != nil {
+		return err
+	}
+
+	addresses, err := wallet.GetAddressInfo(programHash)
+	if err != nil {
+		log.Error("Get addresses error:", err)
+		return errors.New("get wallet addresses failed")
+	}
+
+	return ShowAccountByAddress(addresses, nil, wallet)
+}
+
 func calculateGenesisAddress(genesisBlockHash string) error {
 	genesisBlockBytes, err := common.HexStringToBytes(genesisBlockHash)
 	if err != nil {
@@ -234,6 +251,15 @@ func walletAction(context *cli.Context) {
 		return
 	}
 
+	// show account information
+	if address := context.String("show"); address != "" {
+		if err := listBalanceInfoForAddress(address, wallet); err != nil {
+			fmt.Println("error: list accounts information failed,", err)
+			cli.ShowCommandHelpAndExit(context, "show", 6)
+		}
+		return
+	}
+
 	// transaction actions
 	if param := context.String("transaction"); param != "" {
 		switch param {
@@ -334,7 +360,11 @@ func NewCommand() *cli.Command {
 			},
 			cli.BoolFlag{
 				Name:  "list, l",
-				Usage: "list accounts information, including address, public key, balance and account type.",
+				Usage: "list accounts information, including address, balance and account type.",
+			},
+			cli.StringFlag{
+				Name:  "show, s",
+				Usage: "show account information, including address, balance and account type.",
 			},
 			cli.StringFlag{
 				Name: "transaction, t",
