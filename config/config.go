@@ -14,9 +14,7 @@ const (
 var config *Config // The single instance of config
 
 type Config struct {
-	Host                 string `json:"Host"`
-	SideChainGenesisHash string `json:"SideChainGenesisHash"`
-	DepositAddress       string `json:"DepositAddress"`
+	Host string `json:"Host"`
 }
 
 func (config *Config) readConfigFile() error {

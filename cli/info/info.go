@@ -149,27 +149,6 @@ func NewCommand() *cli.Command {
 				Name:  "currentheight, height",
 				Usage: "show blockchain height on current node",
 			},
-			cli.BoolFlag{
-				Name:  "getbestblockhash",
-				Usage: "show best block hash",
-			},
-			cli.Int64Flag{
-				Name:  "getblockhash, blockh",
-				Usage: "query a block's hash with it's height",
-				Value: -1,
-			},
-			cli.StringFlag{
-				Name:  "getblock, block",
-				Usage: "query a block with height or it's hash",
-			},
-			cli.StringFlag{
-				Name:  "gettransaction, tx",
-				Usage: "query a transaction with it's hash",
-			},
-			cli.BoolFlag{
-				Name:  "showtxpool, txpool",
-				Usage: "show transactions in node's transaction pool",
-			},
 		},
 		Action: infoAction,
 		OnUsageError: func(c *cli.Context, err error, isSubcommand bool) error {

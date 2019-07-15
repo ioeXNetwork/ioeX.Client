@@ -18,7 +18,7 @@ func init() {
 func main() {
 	app := cli.NewApp()
 	app.Name = "ioex-cli"
-	app.Version = "0.1.1"
+	app.Version = "0.1.0"
 	app.HelpName = "ioex-cli"
 	app.Usage = "command line tool for IOEX blockchain"
 	app.UsageText = "ioex-cli [global options] command [command options] [args]"
