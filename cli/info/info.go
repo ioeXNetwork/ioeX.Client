@@ -2,7 +2,6 @@ package info
 
 import (
 	"fmt"
-	"strconv"
 
 	"github.com/ioeXNetwork/ioeX.Client/rpc"
 
@@ -51,66 +50,6 @@ func infoAction(c *cli.Context) error {
 		result, err := rpc.Call("getcurrentheight", nil)
 		if err != nil {
 			fmt.Println("error: get block count failed,", err)
-			return err
-		}
-		printFormat(result)
-		return nil
-	}
-
-	if c.Bool("getbestblockhash") {
-		result, err := rpc.Call("getbestblockhash", nil)
-		if err != nil {
-			fmt.Println("error: get best block hash failed,", err)
-			return err
-		}
-		printFormat(result)
-		return nil
-	}
-
-	if index := c.Int64("getblockhash"); index >= 0 {
-		result, err := rpc.Call("getblockhash", rpc.Param("height", index))
-		if err != nil {
-			fmt.Println("error: get block hash failed,", err)
-			return err
-		}
-		printFormat(result)
-		return nil
-	}
-
-	if param := c.String("getblock"); param != "" {
-		index, err := strconv.ParseInt(param, 10, 64)
-		if err == nil {
-			result, err := rpc.CallAndUnmarshal("getblockhash", rpc.Param("height", index))
-			if err != nil {
-				fmt.Println("error: get block failed,", err)
-				return err
-			}
-			param = result.(string)
-		}
-		result, err := rpc.Call("getblock",
-			rpc.Param("blockhash", param).Add("verbosity", 2))
-		if err != nil {
-			fmt.Println("error: get block failed,", err)
-			return err
-		}
-		printFormat(result)
-		return nil
-	}
-
-	if param := c.String("gettransaction"); param != "" {
-		result, err := rpc.Call("getrawtransaction", rpc.Param("txid", param))
-		if err != nil {
-			fmt.Println("error: get transaction failed,", err)
-			return err
-		}
-		printFormat(result)
-		return nil
-	}
-
-	if c.Bool("showtxpool") {
-		result, err := rpc.Call("getrawmempool", nil)
-		if err != nil {
-			fmt.Println("error: get transaction pool failed,", err)
 			return err
 		}
 		printFormat(result)
